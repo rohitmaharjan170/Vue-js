@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <title>Document</title>
+
+<!-- bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+<!-- style -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- vue js -->
+  <script src="js/vue.js"></script>
+</head>
+
+
+<body>
+  <div class="row col-lg-12" style="justify-content: center;">
+  <div id="root" class="calculator col-lg-2" align="center">
+    
+    <div class="display">{{output || 0}}</div>
+    <div v-on:click="clear" class="btn">C</div>
+    <div @click="sign" class="btn">+/-</div>
+    <div @click="percentage" class="btn">%</div>
+    <div @click="divide" class="btn operator">/</div>
+    <div @click="append('7')" class="btn">7</div>
+    <div @click="append('8')" class="btn">8</div>
+    <div @click="append('9')" class="btn">9</div>
+    <div @click="multiply" class="btn operator">X</div>
+    <div @click="append('4')" class="btn">4</div>
+    <div @click="append('5')" class="btn">5</div>
+    <div @click="append('6')" class="btn">6</div>
+    <div @click="subtract" class="btn operator">-</div>
+    <div @click="append('1')" class="btn">1</div>
+    <div @click="append('2')" class="btn">2</div>
+    <div @click="append('3')" class="btn">3</div>
+    <div @click="add" class="btn operator">+</div>
+    <div @click="append('0')" class="btn zero">0</div>
+    <div @click="dot" class="btn">.</div>
+    <div @click="equal" class="btn">=</div>
+    
+    
+    
+    </div>
+  </div>
+</body>
+</html>
+
+
+<script> 
+    
+const app = new Vue({
+    
+  el: '#root',
+  data:{
+    output: '',
+    previous: null,
+    _operator : null,
+    operatorClicked : false,
+    
+  },
+  
+  methods:{
+  
+      clear(){
+    this.output= '';
+    },
+
+    
+    sign(){
+      this.output = this.output.charAt(0) === '-' ? this.output.slice(1) : `-${this.output}`; 
+    },
+    
+    percentage(){
+    this.output = this.output === '' ? this.output = '' : this.output= `${parseFloat(this.output) / 100}`;
+
+
+    },
+    
+    append(n){
+    if(this.operatorClicked){
+      this.output= '';
+      this.operatorClicked= false;
+    }
+    this.output= `${this.output}${n}`;
+    },
+      
+    
+    dot(){
+      if (this.output.indexOf('.')=== -1)
+      {
+      this.append('.');
+    }
+    },
+    
+    setPrevious(){
+        this.previous = this.output;
+        this.operatorClicked= true;
+    },
+    
+    // fnoperator(op){
+    //   if(op === 'div'){
+    //     this.op =(a,b) => a/b;
+    //     this.setPrevious();
+    //   } 
+      
+    //   else if(op === 'mul')
+    //   {
+    //     this.op =(a,b) => a*b;
+    //     this.setPrevious();
+    //   }
+    //   else if(op === 'sub')
+    //   {
+    //     this.op =(a,b) => a-b;
+    //     this.setPrevious();
+    //   }
+    //   else
+    //   {
+    //     this.op =(a,b) => a+b;
+    //     this.setPrevious();
+    //   }
+    // },
+    
+        divide(){
+          this._operator =(a,b) => a/b;
+          this.setPrevious();
+    },
+    
+        multiply(){
+          this._operator =(a,b) => a*b;
+          this.setPrevious();
+    },
+        subtract(){
+            this._operator =(a,b) => a-b;
+          this.setPrevious();
+    },
+        add(){
+          this._operator =(a,b) => a+b;
+          this.setPrevious();
+    },
+    equal(){
+    this.output= `${this._operator(parseFloat(this.output), parseFloat(this.previous))}`;
+    this.previous = null; 
+    
+    }
+    
+   },
+})
+
+</script>

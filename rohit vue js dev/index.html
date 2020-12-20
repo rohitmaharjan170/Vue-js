@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+				<script src="js/vue.js"></script>
+				<!-- <script src="js/v_script.js"></script> -->
+</head>
+
+<body>
+  <div id="root">
+    
+    hello {{name}}
+    <br>
+    are you male: {{isItTrue ? 'Yes' : 'No'}}
+    
+    <br>
+    Your first pet is: {{petArray[0]}}
+    <br> 
+    And your Third Pet is: {{petArray[2]}}
+    
+    <br> <br>
+    Your School is : {{academicsObject.SLC}}
+    <br>
+    Your High School is: {{academicsObject.NEB}}
+    <br>
+    Your University is: {{academicsObject.Bachelor}}
+    
+      <p>
+    The follwing is message by triggering the function in v-data: <br>
+    {{func()}}
+    <br> <br>
+    another function name PrintMyGF() <br>
+    {{PrintMyGF()}}
+  </p>
+  
+  
+  <p>
+    this is calling the method name welcome from vue reserved method, remeber that func is under vue object data
+    <br>
+    {{welcome()}}
+  </p>
+
+  <p>
+      This is a method called inside a method vue object <br>
+      {{Welcome()}}
+      <br>
+      {{Hello()}}
+      <br>
+      {{HardCode()}}
+      <br>
+      {{DataObjectRef()}}
+    </p>
+
+
+
+  </div>
+  
+
+</body>
+
+
+
+	<script>
+
+	const app = new Vue({
+	el: '#root',
+  	data:{
+  			name : "Rohit Maharjan",
+        	isItTrue: true,
+        	petArray: ['Tison','Sheldy','Rio'],
+
+        academicsObject: {
+        			  SLC: 'AVM',
+            		  NEB: 'Molihss',
+             		  Bachelor: 'Academia'
+       					 },
+        
+        func:()=>{
+       				 return 'This is function name func'
+       			 },
+        
+        PrintMyGF(){   // you can use js type function or ES6 fat arrow function
+        			return("your gf name will be here")
+       				 }
+  		},
+      
+		methods:{
+
+    		welcome(){
+      				return'Hello {{name}}'
+      				},
+
+      		Welcome(){
+    					return 'Welcome guys!!'
+   						 },
+ 	 		  
+  		  Hello:()=>{
+   	  					return ("Hello hello !!")
+    	
+   				 },
+
+    	 HardCode:()=>{
+     				return 'Hard Coded HEllo !!'     
+                },
+                
+		DataObjectRef(){
+    						return this.greeting
+   						 },
+
+               methodhi(){
+                return this.name;
+               }
+   		 },
+
+   	
+  
+})
+
+	</script>
+	
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+
+      <script src="js/vue.js"></script>
+
+      
+</head>
+<body>
+  <div id="root" >
+    <h1>{{name}}</h1>
+     {{update()}}
+    <img :src="src" :alt="alt">
+    
+    
+    <input type="button" v-on:click="btnClick('hehe', $event)" value="Click">
+    
+    <div class="box" v-on:mousemove="getCoOd"></div>
+    <p>
+      x : {{x}} <br>
+      y : {{y}} <br> <br> <br>
+      
+    </p>
+    
+    
+  </div>
+</body>
+</html>
+
+<script>
+const app = new Vue({
+  el: '#root',
+  data:{
+  name: 'Rohit',
+      src:"https://picsum.photos/id/237/200/300",
+      alt: 'This is a lerom picsum image',
+      x :0,
+      y:0,
+  },
+  methods:{
+    update(){
+      setTimeout(()=>{
+        this.name = 'maharjan'
+      },2000)
+    },
+    
+    btnClick(newName,event){
+      this.name= newName;
+      Console.Write(event);
+      
+    },
+    
+    getCoOd(event){
+      this.x=event.clientX;
+      this.y=event.clientY;
+    }
+    
+  },
+
+})
+
+
+</script>
+
+
+<style>
+.box{
+  background:red;
+  height:300px;
+  width : 300px;
+}
+
+</style> 
